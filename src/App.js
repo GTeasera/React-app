@@ -1,6 +1,8 @@
 import  React, {useState} from 'react';
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
+import './styles/App.css';
+import PostItem from "./components/PostItem";
 
 function App() {
     const [likes, setLikes] = useState(5)
@@ -16,6 +18,9 @@ function App() {
             value={value}
             onChange={event => setValue(event.target.value)}
         />
+
+        <PostItem post={{id:1 , title: 'JavaScript', body: 'Desctiption'}}/>
+
     </div>
   );
 }
