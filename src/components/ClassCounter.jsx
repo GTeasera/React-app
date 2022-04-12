@@ -8,6 +8,8 @@ class classCounter extends React.Component{
             count: 0
         }
     }
+    increment = this.increment.bind(this);
+    decrement = this.decrement.bind(this);
 
     increment(){
         this.setState({count: this.state.count + 1})
@@ -21,7 +23,7 @@ class classCounter extends React.Component{
     render(){
         return (
             <div>
-                <h1>{this.count}</h1>
+                <h1>{this.state.count}</h1>
                 <button onClick={this.increment}>+</button>
                 <button onClick={this.decrement}>-</button>
             </div>
