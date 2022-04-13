@@ -3,24 +3,19 @@ import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css';
 import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
 
 function App() {
-    const [likes, setLikes] = useState(5)
-    const [value, setValue] = useState('Some Text')
+    const [posts, setPosts] = useState( [
+        {id: 0, title: 'Title Empty', body: 'Description Empty'},
+        {id: 1, title: 'JavaScript', body: 'Description JavaScript'},
+        {id: 2, title: 'C#', body: 'Description C#'},
+        {id: 3, title: 'C++', body: 'Description C++'}
+    ])
 
   return (
     <div className="App">
-        <Counter/>
-        <ClassCounter/>
-        <h1>{value}</h1>
-        <input
-            type={"text"}
-            value={value}
-            onChange={event => setValue(event.target.value)}
-        />
-
-        <PostItem post={{id:1 , title: 'JavaScript', body: 'Desctiption'}}/>
-
+        <PostList posts={posts} title={'123'}/>
     </div>
   );
 }
