@@ -16,13 +16,22 @@ function App() {
     ])
     
     const [title, setTitle] = useState('My Post Name')
+    const [body, setBody] = useState('My post Description')
+
     /* Way with hook "useRef" */
     const bodyInputRef = useRef();
     /* Way with controlable component */
     const addNewPost = (element) => {
         element.preventDefault()
-        console.log(title)
-        console.log(bodyInputRef.current.value)
+        const newPost = {
+            id: Date.now(),
+            title,
+            body
+        }
+        setPosts([...posts,newPost])
+        console.log(newPost)
+        setTitle('')
+        setBody('')
     }
 
   return (
@@ -39,12 +48,25 @@ function App() {
                 placeholder="Name"
             />
 
-            /* Not controlable compontent */
+            <MyInput
+                /* Controlable compontent */
+                value={body}
+
+                /* Двухстороннее связывание */
+                onChange={element => setBody(element.target.value)}
+
+                type="text"
+                placeholder="Description"
+            />
+
+
+            {/* Not controlable compontent
             <MyInput
                 ref={bodyInputRef}
                 type="text"
                 placeholder="Description"
             />
+            */}
 
             <MyButton onClick={addNewPost}>Create Post</MyButton>
             <MyButton disabled>Edit Post</MyButton>
