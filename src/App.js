@@ -14,24 +14,27 @@ function App() {
         {id: 2, title: 'C#', body: 'Description C#'},
         {id: 3, title: 'C++', body: 'Description C++'}
     ])
-    
-    const [title, setTitle] = useState('My Post Name')
-    const [body, setBody] = useState('My post Description')
+
+    const [post, setPost] = useState({title: '', body: ''})
+    {/*const [title, setTitle] = useState('My Post Name')
+    const [body, setBody] = useState('My post Description')*/}
 
     /* Way with hook "useRef" */
     const bodyInputRef = useRef();
     /* Way with controlable component */
     const addNewPost = (element) => {
         element.preventDefault()
-        const newPost = {
+        {/* const newPost = {
             id: Date.now(),
             title,
             body
         }
         setPosts([...posts,newPost])
         console.log(newPost)
-        setTitle('')
-        setBody('')
+        // setTitle('')
+        // setBody('')*/}
+        setPosts([...posts,{...post, id:Date.now()}])
+        setPost({title: '', body: ''})
     }
 
   return (
@@ -39,10 +42,11 @@ function App() {
         <form>
             <MyInput
                 /* Controlable compontent */
-                value={title}
+                value={post.title}
 
                 /* Двухстороннее связывание */
-                onChange={element => setTitle(element.target.value)}
+                // onChange={element => setTitle(element.target.value)}
+                onChange={element => setPost({...post, title: element.target.value})}
 
                 type="text"
                 placeholder="Name"
@@ -50,10 +54,11 @@ function App() {
 
             <MyInput
                 /* Controlable compontent */
-                value={body}
+                value={post.body}
 
                 /* Двухстороннее связывание */
-                onChange={element => setBody(element.target.value)}
+                //onChange={element => setBody(element.target.value)}
+                onChange={element => setPost({...post, body: element.target.value})}
 
                 type="text"
                 placeholder="Description"
