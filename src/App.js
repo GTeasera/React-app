@@ -7,6 +7,7 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 function App() {
     const [posts, setPosts] = useState( [
@@ -15,7 +16,7 @@ function App() {
         {id: 2, title: 'C#', body: 'Description C#'},
         {id: 3, title: 'C++', body: 'Description C++'}
     ])
-
+    const [selectedSort, setSelectedSort] = useState( '')
     const createPost = (newPost) =>{
         setPosts( [...posts,newPost])
     }
@@ -28,6 +29,16 @@ function App() {
     return (
     <div className="App">
         <PostForm create={createPost}/>
+        <hr style={{margin:'15px 0'}}/>
+        <div>
+            <MySelect
+              defaultValue="Sort by"
+              option={[
+                  {value:'title', name:'Name'},
+                  {value:'body', name:'Description'},
+                  ]}
+            />
+        </div>
         {posts.length !== 0
             ? <PostList remove={removePost} posts={posts} title={'123'}/>
             : <h1 style={{textAlign:"center"}}>
