@@ -25,6 +25,11 @@ function App() {
     const removePost = (post) => {
         setPosts(posts.filter(pos => pos.id !== post.id))
     }
+    
+    const sortPosts = (sort) => {
+        setSelectedSort(sort);
+        setPosts([...posts.sort((a, b)=> a [sort].localeCompare(b[sort]))])
+    }
 
     return (
     <div className="App">
@@ -32,11 +37,13 @@ function App() {
         <hr style={{margin:'15px 0'}}/>
         <div>
             <MySelect
-              defaultValue="Sort by"
-              option={[
-                  {value:'title', name:'Name'},
-                  {value:'body', name:'Description'},
-                  ]}
+                value={selectedSort}
+                onChange={sortPosts}
+                defaultValue="Sort by"
+                option={[
+                    {value:'title', name:'Name'},
+                    {value:'body', name:'Description'},
+                ]}
             />
         </div>
         {posts.length !== 0
