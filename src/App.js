@@ -17,6 +17,18 @@ function App() {
         {id: 3, title: 'C++', body: 'Description C++'}
     ])
     const [selectedSort, setSelectedSort] = useState( '')
+    const [searchQuery, setSearchQuery] = useState( '')
+
+    function  getSortedPosts() {
+        console.log('getSortedPosts()')
+        if(selectedSort){
+            return [...posts.sort((a, b)=> a [selectedSort].localeCompare(b[selectedSort]))]
+        }
+        return posts;
+    }
+
+    const sortedPosts = getSortedPosts()
+
     const createPost = (newPost) =>{
         setPosts( [...posts,newPost])
     }
@@ -25,10 +37,9 @@ function App() {
     const removePost = (post) => {
         setPosts(posts.filter(pos => pos.id !== post.id))
     }
-    
-    const sortPosts = (sort) => {
+
+    const sortPosts = (sort) =>{
         setSelectedSort(sort);
-        setPosts([...posts.sort((a, b)=> a [sort].localeCompare(b[sort]))])
     }
 
     return (
@@ -36,9 +47,13 @@ function App() {
         <PostForm create={createPost}/>
         <hr style={{margin:'15px 0'}}/>
         <div>
+            <MyInput
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search..."/>
             <MySelect
                 value={selectedSort}
-                onChange={sortPosts}
+                onChange={sortedPosts}
                 defaultValue="Sort by"
                 option={[
                     {value:'title', name:'Name'},
@@ -47,7 +62,7 @@ function App() {
             />
         </div>
         {posts.length !== 0
-            ? <PostList remove={removePost} posts={posts} title={'123'}/>
+            ? <PostList remove={removePost} posts={sortedPosts} title={'123'}/>
             : <h1 style={{textAlign:"center"}}>
                 Posts unavailable
             </h1>
